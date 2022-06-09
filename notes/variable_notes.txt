@@ -1,0 +1,165 @@
+#Execute - 
+terraform plan -  to execute simple program not required any Plugin, to do a dry run of your plan  to see what it’s actually going to do
+terraform providers - get information about providers used in(Providers required by configuration)
+terraform init - initialize directory, pull down providers
+terraform apply - 
+
+output hello {
+    value = "Hello world"
+}
+
+# multiple block - Disadvantage -> solution disstructre 
+output "block1" {
+  value="block1 value"
+}
+
+output "block2" {
+  value="block2 value"
+}
+
+#3. Multiple Terraform file in Same Directory
+- Suppose in the folder 3 tf files avaliable , plan will execute all 3
+- Execute in alphabetical order
+
+4. Variable -> read from user -Best practise -> create a seprate file for variable and output
+
+variable username1 {
+}
+
+output printName {
+  value ="Hello ${var.username1}"
+}
+
+#Execute terraform plan-> value will be asked at runtime
+terraform plan -var "username1=Rahul"  --non interactive mode , pass variable value same time
+
+5. Multiple variable
+variable age {
+  
+}
+
+$ terraform plan -var "username1=Rahul" -var "age=34"
+
+6. Variable Types 
+variable username1 {
+  type = String
+}
+
+variable age {
+  type = number
+}
+
+output printName {
+  value ="Hello ${var.username1} and your age is : ${var.age}"
+}
+
+# types -> String, number, bool, list, map, 
+
+7. List
+
+variable users {
+  type = list
+}
+
+output printName {
+  value ="Hello ${var.users[0]}"
+}
+
+#["ram", "sohan", "vijay"]
+
+8. Variable default value 
+variable users1 {
+  type = string
+  default = "Raj"
+}
+
+- don't pass the value at run time then default value will take
+
+9. Functions- 30+ Functions are there like number fun, string fun
+name - ${fun1}
+
+#join take 2 arguments seprator , value
+
+variable users1 {
+  type = list
+  default = ["ram", "sohan", "vijay"]
+}
+
+output printName {
+  value ="Hello ${join(".....",var.users1)}"
+  #value = "${upper(var.users1[0])}"
+  #title - 1st char capital
+}
+
+10. Map Variable
+variable users1 {
+  type = map
+  default = {
+      raj=30
+      rakesh=35
+  }
+}
+
+output printName {
+  value = "My name is raj and age is ${lookup(var.users1,"raj")}"
+}
+
+
+11. How to use map variable Dynamically
+variable users1 {
+  type = map
+  default = {
+      raj=30
+      rakesh=35
+  }
+}
+
+variable username {
+  type = string
+}
+
+output printName {
+  value = "My name is ${var.username} and age is ${lookup(var.users1,"${var.username}")}"
+}
+
+12. TFVARs Files in terraform
+- suppose we have 50 variables and need to pass all in execution so, it is difficult task
+-create one file terraform.tfvars always same name
+username = "ram kumar"
+age =23
+
+file2
+variable username {
+  type = string
+}
+
+variable age {
+  type = number
+}
+
+output printName {
+  value = "My name is ${var.username} and age is ${var.age}"
+}
+
+# automatically variable will take value from tdvars file
+
+
+13. TFVARs Files With Different Name ( custom TFVARs Files )
+-suppose want to keep terraform file something else
+-create 1 file name dev.tfvars
+- create variable 
+execute - terraform plan -var-file=dev.tfvars
+
+14.  Read Environment Variable in Terraform Configurations
+$export TF_VAR_username=rahul
+echo $username
+terraform plan
+
+15.  Terraform Core and Terraform Plugin
+
+
+
+
+
+
+

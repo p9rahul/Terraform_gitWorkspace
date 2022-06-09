@@ -1,0 +1,39 @@
+#Portal -> use provider
+
+provider "github" {
+  # Configuration options
+  token = "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"
+}
+
+#Portal -> documentation - Resources -> search resources 
+resource "github_repository" "terraform_git_repo" {
+  name        = "terraform_git_repo1"
+  description = "create sample repo form terraform"
+  visibility = "public"
+
+# take Argument Reference from provider portal
+  auto_init =  true
+
+#   template {
+#     owner      = "github"
+#     repository = "terraform-module-template"
+#   }
+}
+
+/*terrraform init 
+- .terraform and inside this will see plugin provider name
+- .terraform.lock.hcl
+- terraform.tfstate - terraform maintain the state , takes backup from here  
+
+terraform apply-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
+
+
+Q) How to destroy git resource?
+-terraform destroy
+
+Q) if we want to delete only 1 repos out of 2?
+- create 2 resource
+- terraform destroy --target github_repository.terraform_git_repo2 
+*/
