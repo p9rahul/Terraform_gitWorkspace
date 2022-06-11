@@ -1,3 +1,19 @@
+/*
+- to store tfstate file on S3
+- create bucket, aws cli must be installed $aws -v 
+$aws configure it will ask access key,secret key,region 
+$sudo apt-get install awscli
+- when we use s3 as a remote beckend ,user should have s3 bucker permission -> see terraform website
+*/
+# terraform {
+#   backend "s3" {
+#     bucket = "rahul-tf-state"  
+#     region = "us-east-1"
+#     key="terraform.tfstate"
+#     dynamodb ="table_name"
+#   }
+# }
+
 #Datasource in Terraform
 data "aws_ami" "ubuntu" {
   most_recent = true

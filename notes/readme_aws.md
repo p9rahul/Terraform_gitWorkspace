@@ -125,7 +125,32 @@ here
 - project awsDataSources
 - add modules folders
 - terraform init and see inside .terraform
-Q) now we have to use a different ami name in our run time code?
+Q) now we have to use a different aws ami name/instance type in our run time code for different aws account?
+
+55. Terraform Backends - Terraform s3 backend
+-as we know terraform maintains the state in tfstate file
+-but this file should not push to git , security reason
+-other team members may have diffrent credential
+- terraform provids central remote location where we can maintain tfstate file 
+-storing machanism like S3,git,azure check on site
+-tfstate file will be created on s3
+task- till now tfstate file is in default workspace
+-create 2 new workspace like test and dev
+-switch default to test/dev , execute terraform plan &apply, so how tfstate file will be created?
+answer- a new env folder will be created and inside that tfstate file will be there
+
+56. Terraform Migrate Backend
+Q) migrate tfstate file from s3 to local?
+- terraform init -migrate-state
+
+57. Remote Backend State Locking using S3 and DynamoDB
+- let's consider 2 person executed apply cmds same time then what will happend?
+- locking machanism 
+- aws - dynamoDb service (inside this create entry)
+- go inside the table 
+-configure with terraform  (terraform - backend block)
+
+
 
 
 
