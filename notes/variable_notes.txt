@@ -124,7 +124,7 @@ output printName {
 
 12. TFVARs Files in terraform
 - suppose we have 50 variables and need to pass all in execution so, it is difficult task
--create one file terraform.tfvars always same name
+- create one file terraform.tfvars always with same name
 username = "ram kumar"
 age =23
 
@@ -141,14 +141,15 @@ output printName {
   value = "My name is ${var.username} and age is ${var.age}"
 }
 
-# automatically variable will take value from tdvars file
+# automatically variable will take value from tfvars file
 
 
 13. TFVARs Files With Different Name ( custom TFVARs Files )
--suppose want to keep terraform file something else
+-suppose we want to keep terraform.tfvars file name something else
 -create 1 file name dev.tfvars
-- create variable 
+-create variable 
 execute - terraform plan -var-file=dev.tfvars
+- if execute only terraform plan then it will pick default terraform.tfvars file
 
 14.  Read Environment Variable in Terraform Configurations
 $export TF_VAR_username=rahul
