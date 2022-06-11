@@ -125,6 +125,7 @@ output printName {
 12. TFVARs Files in terraform
 - suppose we have 50 variables and need to pass all in execution so, it is difficult task
 - create one file terraform.tfvars always with same name
+- store tfvars variable in key pair 
 username = "ram kumar"
 age =23
 
@@ -147,7 +148,7 @@ output printName {
 13. TFVARs Files With Different Name ( custom TFVARs Files )
 -suppose we want to keep terraform.tfvars file name something else
 -create 1 file name dev.tfvars
--create variable 
+-create soem variable in key pair
 execute - terraform plan -var-file=dev.tfvars
 - if execute only terraform plan then it will pick default terraform.tfvars file
 
